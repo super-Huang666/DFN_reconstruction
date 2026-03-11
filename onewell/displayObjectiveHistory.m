@@ -1,50 +1,50 @@
 function [first_occur_iter, unique_vals, final_value] = displayObjectiveHistory(objective_history)
-% DISPLAYOBJECTIVEHISTORY 显示目标函数优化历史
-%   输入参数:
-%       objective_history - 目标函数值历史记录向量
+% DISPLAYOBJECTIVEHISTORY Display objective function optimization history
+%   Input:
+%       objective_history - Vector of objective function value history
 %
-%   输出参数:
-%       first_occur_iter - 唯一值首次出现的迭代次数
-%       unique_vals      - 对应的唯一目标值
-%       final_value      - 最终优化结果值
+%   Output:
+%       first_occur_iter - Iteration numbers where unique values first appear
+%       unique_vals      - Corresponding unique objective values
+%       final_value      - Final optimized objective value
 
-    % 检查输入是否为空
+    % Check if the input is empty
     if isempty(objective_history)
-        disp('目标函数历史为空');
+        disp('Objective function history is empty');
         first_occur_iter = [];
         unique_vals = [];
         final_value = [];
         return;
     end
     
-    % 找出所有目标值首次出现的位置
+    % Find the first occurrence positions of all objective values
     [unique_vals, first_occur_indices] = unique(objective_history, 'first');
     
-    % 按迭代顺序排序
+    % Sort according to iteration order
     [sorted_indices, sort_order] = sort(first_occur_indices);
     sorted_vals = unique_vals(sort_order);
     
-    % 设置输出参数
+    % Set output variables
     first_occur_iter = sorted_indices;
     unique_vals = sorted_vals;
     final_value = objective_history(end);
     
-    % 显示结果 - 优化为Excel友好格式
-    disp('复制以下数据到Excel:');
-    disp('迭代次数 | 目标函数值');
-    disp('---------------------');
+    % Display results - optimized for Excel-friendly format
+    disp('Copy the following data to Excel:');
+    disp('Iteration | Objective Value');
+    disp('---------------------------');
     
-    % 创建表格数据字符串
+    % Create table data string
     data_str = '';
     for i = 1:length(sorted_indices)
-        % 创建制表符分隔的行
+        % Create tab-separated row
         row_str = sprintf('%d\t%.6f\n', sorted_indices(i), sorted_vals(i));
-        fprintf(row_str);  % 显示在命令窗口
-        data_str = [data_str, row_str];  % 添加到完整数据字符串
+        fprintf(row_str);  % Display in command window
+        data_str = [data_str, row_str];  % Append to full data string
     end
     
-    % 添加最终结果行
-    final_row = sprintf('\n最终结果\t%.6f\t(迭代 %d)\n', final_value, length(objective_history));
+    % Add final result row
+    final_row = sprintf('\nFinal Result\t%.6f\t(Iteration %d)\n', final_value, length(objective_history));
     fprintf(final_row);
     data_str = [data_str, final_row];
 end
