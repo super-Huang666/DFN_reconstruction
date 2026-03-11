@@ -33,9 +33,9 @@ Axes('box',[0,0,0,2,2,2],'view',[30,30]); % sets bounding box and view in 3d
 % see more at: http://alghalandis.net/products/adfne
 % Updated.: 2018-01-11
 
-opt = Option(varargin,'box',[0,0,0,1,1,1],'view',[-35,20],'p',0,...             % 原代码default values for arguments
+opt = Option(varargin,'box',[0,0,0,1,1,1],'view',[-35,20],'p',0,...             
     'light',[]);
-% opt = Option(varargin,'box',[0,0,0,0.07,0.05,0.05],'view',[-35,20],'p',0,...             % 修改box可更改坐标轴范围default values for arguments
+% opt = Option(varargin,'box',[0,0,0,0.07,0.05,0.05],'view',[-35,20],'p',0,...             
 %     'light',[]);
 if isfield(opt,'in')
     if opt.in == 2
