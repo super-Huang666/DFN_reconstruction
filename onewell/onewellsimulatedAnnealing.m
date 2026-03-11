@@ -5,7 +5,7 @@ function [D_opt, a_opt, af_opt, Nt_opt, objectiveValue,fnm_opt,optCFI_x_new,optP
     current_af = af_initial; 
     current_Nt = Nt_initial;
     [current_objective, current_fnm, current_CFI, current_P10, current_selected] = onewellevaluateSolution(current_D, current_a, current_af, current_Nt, l_ratio, n, L, dim, CFI_x_initial, P10_initial, bbx, pos, linePoints);
-    % 初始化最佳解
+    % Initialize the optimal solution
     best_objective = current_objective;
     best_params = [current_D, current_a, current_af, current_Nt];
     best_fnm = current_fnm;
@@ -21,22 +21,22 @@ function [D_opt, a_opt, af_opt, Nt_opt, objectiveValue,fnm_opt,optCFI_x_new,optP
             fprintf('Iter %d: D_new=%.4f, a_new=%.4f, af_new=%.4f, Nt_new=%d\n', ...
                 iter, D_new, a_new, af_new, Nt_new);
 
-            % 计算新解的目标函数
+            % Calculate the objective function value of the new solution
             [objective_new, fnm_new, CFI_new, P10_new, selected_new] = onewellevaluateSolution(D_new, a_new, af_new, Nt_new, l_ratio, n, L, dim, CFI_x_initial, P10_initial, bbx, pos, linePoints);
             fprintf('  CFI_x length = %d\n', length(CFI_new));
-            % 接受准则
+            % Acceptance criteria
             delta = objective_new - current_objective;
             accept = false;
             if delta < 0
-                accept = true; % 接受更优解
+                accept = true; % Accept a better solution
             else
                 prob = exp(-delta / T);
                 if rand() < prob
-                    accept = true; % 以一定概率接受较差解
+                    accept = true; % Accept the poor solution with a certain probability
                 end
             end
             if accept
-                % 接受新解作为当前解
+                % Accept the new solution as the current solution
                 current_D = D_new;
                 current_a = a_new;
                 current_af = af_new;
@@ -47,7 +47,7 @@ function [D_opt, a_opt, af_opt, Nt_opt, objectiveValue,fnm_opt,optCFI_x_new,optP
                 current_P10 = P10_new;
                 current_selected = selected_new;
                 
-                % 更新全局最优解
+                % Update global optimal solution
                 if current_objective < best_objective
                     best_objective = current_objective;
                     best_params = [current_D, current_a, current_af, current_Nt];
@@ -57,17 +57,17 @@ function [D_opt, a_opt, af_opt, Nt_opt, objectiveValue,fnm_opt,optCFI_x_new,optP
                     best_selected = current_selected;
                 end
             end
-            % 记录目标函数历史
+            % Record the historical value of the objective function
             objective_history(end+1) = current_objective;
             
-            % 输出日志
+            % Output log
             fprintf('Iteration %d: T=%.2f, Current Objective=%.4f, Best Objective=%.4f\n', iter, T, current_objective, best_objective);
         end
         % Reduce temperature
         T = T * alpha;
     end
 
-        % 返回最优解
+        % Update optimal solution
     D_opt = best_params(1);
     a_opt = best_params(2);
     af_opt = best_params(3);
