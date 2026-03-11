@@ -1,5 +1,5 @@
 function isInside = isPointInPlane(point, planePoints)
-%判断点是否在平面内
+%Judge whether the point is in the plane
     num=length(planePoints);
     m=1;
     for i=1:num-2
