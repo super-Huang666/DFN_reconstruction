@@ -1,10 +1,10 @@
     function [p_total,CumP]=Multi_cas_1(l_ratio,D,n,dim)
-        %使用Multiplicative Cascade Process方法计算裂隙中心点的密度概率
-        %l_ratio是子域与父域的长度的比值，在这里只计算了2的情况
-        %D是裂隙终点的分形维数
-        %n是迭代次数,实际迭代次数需要加1
-        %p是密度概率
-        %Cump是累积概率
+        %Calculation of density probability of fracture center using multiplicative cascade process method
+        %L_ratio is the ratio of the length of the child domain to that of the parent domain. Here, only the case of 2 is calculated
+        %D is the fractal dimension of fracture midpoint
+        %N is the number of iterations. The actual number of iterations needs to be increased by 1
+        %P is the density probability
+        %Cump is the cumulative probability
         m=(1/l_ratio)^D;
 %         syms p0 a b
 %          p_sym=solve(p0^2-a*p0+(a^2-b)/2==0,'p0');%matlab 2017b
