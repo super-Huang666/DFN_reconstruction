@@ -1,5 +1,5 @@
 function inside = isPointInPolygon(point, polygon)
-    % 判断点是否在平面多边形内（使用射线法）
+    % Determine whether the point is within the plane polygon (using the ray method)
     x = point(1); y = point(2); 
     polyX = polygon(:,1); polyY = polygon(:,2);
     n = length(polyX);
