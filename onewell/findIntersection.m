@@ -1,16 +1,18 @@
 function intersectionPoint = findIntersection(linePoints, planePoints)
-% 直线由两个点定义 linePoints = [x1, y1, z1; x2, y2, z2]
-% 平面由多个点定义 planePoints
+% The line is defined by two points: linePoints = [x1, y1, z1; x2, y2, z2]
+% The plane is defined by multiple points: planePoints
 
-% 计算直线的方向向量
+% Compute the direction vector of the line
 directionVector = linePoints(2, :) - linePoints(1, :);
 
-%  计算平面的法向量
-normalVector = cross(planePoints(2, :) - planePoints(1, :), planePoints(3, :) - planePoints(1, :));
+% Compute the normal vector of the plane
+normalVector = cross(planePoints(2, :) - planePoints(1, :), ...
+                     planePoints(3, :) - planePoints(1, :));
 
-% 计算直线上的参数 t
-t = dot(normalVector, planePoints(1, :) - linePoints(1, :)) / dot(normalVector, directionVector);
+% Compute the parameter t on the line
+t = dot(normalVector, planePoints(1, :) - linePoints(1, :)) / ...
+    dot(normalVector, directionVector);
 
-% 计算交点
+% Compute the intersection point
 intersectionPoint = linePoints(1, :) + t * directionVector;
 end
