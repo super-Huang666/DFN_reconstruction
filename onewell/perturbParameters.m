@@ -1,26 +1,26 @@
-% 子函数：参数扰动
+% Subfunctions: parameter perturbation
 function [D_new, a_new, af_new, Nt_new] = perturbParameters(D, a, af, Nt, T)
-    % 定义微小偏移量防止取到边界值
-    epsilon = 1e-6;  % 可根据需求调整精度
-    T_initial = 1000; % 与主程序初始温度一致
+    % Define small offset to prevent getting boundary value
+    epsilon = 1e-6;  % Accuracy can be adjusted as required
+    T_initial = 1000; % Consistent with the initial temperature of the main program
 
-    % D: 分形维数（范围 2.0~3.0）
-    p_D = (T / T_initial) * 0.01; % 扰动幅度随温度降低缩小
+    % D: Fractal dimension (range 2.0~3.0)
+    p_D = (T / T_initial) * 0.01; % The disturbance amplitude decreases with decreasing temperature
     D_new = D + (rand() - 0.5)* 2 * p_D;
-    D_new = max(2.0+ epsilon , min(3.0 - epsilon, D_new)); % 限制取值范围
+    D_new = max(2.0+ epsilon , min(3.0 - epsilon, D_new)); % Limit value range
 
-    % a: 长度指数（范围 2.0~3.5）
+    % a: Length exponent (range 2.0~3.5)
     p_a = (T / T_initial) * 0.01;
     a_new = a + (rand() - 0.5)* 2 * p_a;
     a_new = max(2.0 + epsilon, min(3.5 - epsilon, a_new));
 
-    % af: 归一化常数（范围 0~5）
+    % af: Normalization constant (range 0-5)
     p_af = (T / T_initial) * 0.1;
     af_new = af + (rand() - 0.5)* 2 * p_af;
     af_new = max(0, min(10, af_new));
 
-    % Nt: 裂缝数量范围，扰动步长与温度相关）
-    max_Nt_step = round(20 * (T / T_initial)); % 温度越低，步长越小
+    % Nt: The range of crack number and disturbance step are related to temperature
+    max_Nt_step = round(20 * (T / T_initial)); % The lower the temperature, the smaller the step size
     Nt_new = Nt + round((rand() - 0.5) * 2 * max_Nt_step);
-    Nt_new = max(20, min(80, Nt_new)); % 范围
+    Nt_new = max(686, min(6500, Nt_new)); % Range of fracture number
 end
