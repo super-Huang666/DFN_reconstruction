@@ -1,4 +1,5 @@
-# DFN_reconstruction 
+# DFN_reconstruction
+Logging-constrained 3D DFN Reconstruction Framework
 ## Description
 DFN_reconstruction provides the MATLAB implementation of a framework for reconstructing three-dimensional discrete fracture networks (DFN) constrained by logging data.
 
